@@ -1,24 +1,12 @@
-const toToItems = [
-    {
-        item: "Finish my project"
-    },
+import React from 'react';
 
-    {
-        item: "Push my project to GitHub"
-    },
-
-    {
-        item: "Prepare for tomorrow's material"
-    }
-]
+function Todo (props) {
+    return (
+        <div>
+            <p>{props.todoItem.task}</p>
+        </div>
+    );
+}
 
 
-addToDo = event => {
-    event.preventDefault();
-    this.setState({
-        toDoOnState: [...this.StaticRange.toDoOnState, this.StaticRange.toDoItems],
-        toDoItems: {
-            todo: "",
-        }
-    });
-};
+export default Todo;
