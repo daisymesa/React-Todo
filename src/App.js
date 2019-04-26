@@ -4,6 +4,7 @@ import TodoList from './components/TodoComponents/TodoList';
 
 import TodoForm from './components/TodoComponents/TodoForm';
 
+//This is an array, toDoItems, and they are the default to do items that will show up
 
 const toDoItems = [
   {
@@ -19,8 +20,6 @@ const toDoItems = [
 ];
 
 
-
-
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -32,17 +31,22 @@ class App extends React.Component {
       toDoItems: toDoItems,
       task: "",
       id: "",
+      completed: false
     }
   }
 
   addToDo = event => {
     event.preventDefault();
+
     this.setState({
-      toDoItems: [...this.StaticRange.toDoOnState, this.StaticRange.toDoItems],
+      toDoItems: [...this.state.toDoOnState, this.state.toDoItems],
+
       toDoItems: {
         task: "",
-        id: ""
+        id: "",
+        completed: false
       }
+
     });
   };
 
@@ -55,20 +59,68 @@ class App extends React.Component {
     })
   }
 
+  
+  // New To Do's
+  addItemHandler = event => {
+    event.preventDefault();
+    this.setState(prevState => {
+      return {
+        toDoItems: [
+          ...prevState.toDoItems,
+          {
+            completed: false,
+            id: Date.now(),
+            name: prevState.task
+          }
+        ],
+        task: ""
+      };
+    });
+  };
+
+  // Toggle Task
+  toggleItem = itemId => {
+    this.setState(prevState => {
+      return {
+        toDoItems: prevState.toDoItems.map(taskItem => {
+          if (taskItem.id === itemId) {
+            return {
+              ...taskItem,
+              completed: !taskItem.completed
+            };
+          } else {
+            return taskItem;
+          }
+        })
+      };
+    });
+  };
+
 
   render() {
     return (
-
       <div>
-        <h2>To List Hello</h2>
-        < TodoList toDoItems={this.state.toDoItems} task={this.state.task} />
-        < TodoForm />
+
+        <div className="header">
+          <h2>To List</h2>
+        </div>
+
+        < TodoList
+          toDoItems={this.state.toDoItems}
+          task={this.state.task}
+          toggleItem={this.toggleItem}
+        />
+
+        < TodoForm
+          toDoItems={this.state.toDoItems}
+          handleChanges={this.handleChanges}
+          addToDo={this.addToDo}
+        />
+
       </div>
 
     );
   }
-
-
 }
 
 export default App;

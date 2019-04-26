@@ -1,6 +1,6 @@
 import React from 'react';
 
-//This is the form itself: the input field and the submit button
+//This is the form itself: the input field and the submit + completed buttons
 
 function TodoForm(props) {
     return (
@@ -11,7 +11,7 @@ function TodoForm(props) {
                 onChange={props.handleChanges}
                 name="todo"
             />
-            
+
             <button onClick={props.addToDo}>
                 Add To Do</button>
             <button onClick={props.addToDo}>
@@ -20,7 +20,6 @@ function TodoForm(props) {
         </form>
     )
 }
-
 
 
 export default TodoForm;

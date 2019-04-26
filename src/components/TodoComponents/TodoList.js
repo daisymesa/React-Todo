@@ -2,16 +2,18 @@ import React from 'react';
 
 import Todo from './Todo';
 
-
-
-
+//Here is where the array for the toDoItems is being mapped
 
 function TodoList(props) {
     return (
-        <div>
-            {props.toDoItems.map((todoItem, index) => {
+        <div className="to-do-list">
+            {props.toDoItems.map( (todoItem, index) => {
                 return (
-                    <Todo todoItem={todoItem} key={index} />
+                    <Todo 
+                    todoItem={todoItem} 
+                    key={index}
+                    // toggleItem={props.toggleItem}
+                    />
                 );
             })}
 
@@ -20,12 +22,7 @@ function TodoList(props) {
 }
 
 
-
-
-
 export default TodoList;
-
-
 
 
 // your components will all go in this `component` directory.
